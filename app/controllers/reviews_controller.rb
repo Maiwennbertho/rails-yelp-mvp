@@ -1,16 +1,11 @@
 class ReviewsController < ApplicationController
-  before_action :set_restaurant, only: [:index, :new, :create]
-
-  def index
-    @reviews = Review.where(restaurant_id: @restaurant)
-  end
+  before_action :set_restaurant, only: %i[new create]
 
   def new
     @review = Review.new
   end
 
   def create
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @review = Review.new(review_params)
     @review.restaurant = @restaurant
     if @review.save
